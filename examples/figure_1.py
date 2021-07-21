@@ -8,7 +8,7 @@ import time
 
 import sigma.exact as exact
 
-from sigma.simulation import run_simulation
+from sigma.simulation import run_simulations
 from sigma.utils import *
 
 def produce_panel_for_figure_1(structure, b, c, mutation_rates_exact, 
@@ -45,9 +45,9 @@ def produce_panel_for_figure_1(structure, b, c, mutation_rates_exact,
 
 		print('Running simulations for benefit %s and selection intensity %s.' % (benefit, selection_intensity))
 		start_time = time.time()
-		ff_simulation = run_simulation(structure, 'ff', benefit, c, mutation_rates_simulation, 
+		ff_simulation = run_simulations(structure, 'ff', benefit, c, mutation_rates_simulation, 
 			selection_intensity, number_of_updates)
-		pp_simulation = run_simulation(structure, 'pp', benefit, c, mutation_rates_simulation, 
+		pp_simulation = run_simulations(structure, 'pp', benefit, c, mutation_rates_simulation, 
 			selection_intensity, number_of_updates)
 		print('Total time taken: %s seconds.' % (np.round(time.time() - start_time, 3)))
 

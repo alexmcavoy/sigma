@@ -8,7 +8,7 @@ import time
 
 import sigma.exact as exact
 
-from sigma.simulation import run_simulation
+from sigma.simulation import run_simulations
 from sigma.utils import *
 
 def produce_panel_for_figure_2(structure, b, c, mutation_rates_exact, 
