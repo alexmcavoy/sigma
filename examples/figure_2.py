@@ -44,6 +44,7 @@ def produce_panel_for_figure_2(structure, b, c, mutation_rates_exact,
 
 	for selection_intensity in selection_intensities:
 		print('Running simulations for selection intensity %s.' % selection_intensity)
+		start_time = time.time()
 		ff_simulation = run_simulations(structure, 'ff', b, c, 
 			mutation_rates_simulation, selection_intensity, number_of_updates)
 		pp_simulation = run_simulations(structure, 'pp', b, c, 
