@@ -31,4 +31,4 @@ Parameters may be adjusted as needed in `examples/figure_1.py` and `examples/fig
 	
 ## Contact information
 
-Please direct questions to Alex McAvoy (`alexmcavoy@gmail.com`) or John Wakeley (`wakeley@fas.harvard.edu`).
+Please direct questions to Alex McAvoy (`alexmcavoy@gmail.com`).
