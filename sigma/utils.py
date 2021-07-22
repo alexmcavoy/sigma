@@ -11,7 +11,7 @@ def save_data(data, filename):
 
 	Parameters
 	----------
-	data: Object
+	data: object
 		The data that is to be saved
 	filename: str
 		The path and name of file for the serialized data
@@ -29,6 +29,11 @@ def open_data(filename):
 	----------
 	filename: str
 		The path and name of file of the serialized data
+
+	Returns
+	-------
+	object
+		The reconstituted object from its pickled representation
 	'''
 
 	with open(filename, 'rb') as f:
