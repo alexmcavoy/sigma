@@ -42,6 +42,7 @@ def run_simulations(structure, social_good, b, c, mutation_rates,
 		state = np.random.randint(0, 2, nx.number_of_nodes(structure))
 		pop = Population(structure, state, social_good, b, c, mutation_rate, selection_intensity)
 		return np.mean(pop.update_population(trait, number_of_updates))
+	
 	# run calculations in parallel, using the maximum number of cpu cores
 	simulated_selection_effects = np.asarray(Parallel(n_jobs=os.cpu_count())(
 		delayed(run_single_simulation)(mutation_rate) for mutation_rate in mutation_rates))
