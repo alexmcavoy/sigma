@@ -1,4 +1,4 @@
-#sigma
+# sigma
 
 Supporting code for the paper "Evaluating the structure coefficient theorem of evolutionary game theory" by Alex McAvoy and John Wakeley, available at [https://arxiv.org/abs/2010.14566](https://arxiv.org/abs/2010.14566).
 
