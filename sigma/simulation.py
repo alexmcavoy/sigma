@@ -169,7 +169,6 @@ class Population(object):
 		
 		mean_frequencies = np.zeros((number_of_updates,))
 		for update in range(0, number_of_updates):
-			# print(update)
 			# select individual for death, uniformly at random from the population
 			death = np.random.randint(self._population_size)
 
