@@ -38,7 +38,7 @@ def produce_panel_for_figure_2(structure, b, c, mutation_rates_exact,
 	
 	print('Running exact calculations.')
 	start_time = time.time()
-	# run exact calculations (write 'lsqr' in place of 'spsolve' to use a least-squares solver)
+	# run exact calculations (replace 'spsolve' with 'lsqr' to use a least-squares solver)
 	ff_exact, pp_exact = exact.run_calculations(structure, b, c, mutation_rates_exact, solver='spsolve')
 	print('Total time taken: %s seconds.' % (np.round(time.time() - start_time, 3)))
 

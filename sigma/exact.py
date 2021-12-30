@@ -35,9 +35,9 @@ def run_calculations(structure, b, c, mutation_rates, solver='spsolve', verbose=
 	def run_single_calculation(mutation_rate):
 		if verbose:
 			print(mutation_rate)
-		k1, k2, w, A = structure_coefficients(structure, mutation_rate, solver)
-		ff = frequency_derivative(k1, k2, w, A, b, c, 'ff')
-		pp = frequency_derivative(k1, k2, w, A, b, c, 'pp')
+		K1, K2, w, A = structure_coefficients(structure, mutation_rate, solver)
+		ff = frequency_derivative(K1, K2, w, A, b, c, 'ff')
+		pp = frequency_derivative(K1, K2, w, A, b, c, 'pp')
 		return ff, pp
 
 	# run calculations in parallel, using the maximum number of cpu cores
@@ -176,9 +176,9 @@ def structure_coefficients(structure, mutation_rate, solver):
 	Returns
 	-------
 	numpy.ndarray
-		The matrix of structure coefficients, k1
+		The matrix of structure coefficients, K1
 	numpy.ndarray
-		The matrix of structure coefficients, k2
+		The matrix of structure coefficients, K2
 	numpy.ndarray
 		The dense representation of the adjacency matrix
 	numpy.ndarray
@@ -189,7 +189,7 @@ def structure_coefficients(structure, mutation_rate, solver):
 	m = marginal_fecundity_effects(A)
 	v = location_weights(e, d, mutation_rate).reshape(1, -1)
 	phi = identity_by_state_probabilities(A, mutation_rate, solver)
-	k1, k2 = np.zeros(e.shape), np.zeros(e.shape)
+	K1, K2 = np.zeros(e.shape), np.zeros(e.shape)
 	for j in range(0, e.shape[0]):
 		mj = np.asarray(m[j].todense())
 		term1 = (v@(mj*phi)).T
@@ -197,20 +197,20 @@ def structure_coefficients(structure, mutation_rate, solver):
 		term3 = ((v@mj)*phi[j, :].reshape(1, -1)).T
 		term4 = ((v@mj).T)@phi[j, :].reshape(1, -1)
 		term5 = np.sum(v@mj)/e.shape[0]
-		k1 += (1/2)*(-(term1+term2)+(1-mutation_rate)*(term3+term4)+term5)
-		k2 += (1/2)*(-(term1-term2)+(1-mutation_rate)*(term3-term4))
-	return k1, k2, np.asarray(w.todense()), np.asarray(A.todense())
+		K1 += (1/2)*(-(term1+term2)+(1-mutation_rate)*(term3+term4)+term5)
+		K2 += (1/2)*(-(term1-term2)+(1-mutation_rate)*(term3-term4))
+	return K1, K2, np.asarray(w.todense()), np.asarray(A.todense())
 
-def frequency_derivative(k1, k2, w, A, b, c, social_good):
+def frequency_derivative(K1, K2, w, A, b, c, social_good):
 	'''
 	Calculates the first-order effects of selection on mean frequencies
 
 	Parameters
 	----------
-	k1: numpy.ndarray
-		The matrix of structure coefficients, k1
-	k2: numpy.ndarray
-		The matrix of structure coefficients, k2
+	K1: numpy.ndarray
+		The matrix of structure coefficients, K1
+	K2: numpy.ndarray
+		The matrix of structure coefficients, K2
 	w: numpy.ndarray
 		The adjacency matrix for the structure
 	A: numpy.ndarray
@@ -233,7 +233,7 @@ def frequency_derivative(k1, k2, w, A, b, c, social_good):
 	elif not social_good.lower() in ['ff', 'pp']:
 		raise ValueError('Social good must be \'ff\' or \'pp\'.')
 	if social_good.lower()=='ff':
-		return (1/2)*(np.sum(np.diag(A@(k1-k2)))*b-np.sum(np.diag((A.T)@(k1+k2)))*c)
+		return (1/2)*(np.sum(np.diag(A@(K1-K2)))*b-np.sum(np.diag((A.T)@(K1+K2)))*c)
 	else:
-		k1_pp, k2_pp = np.sum(np.multiply(k1, w)), np.sum(np.multiply(k2, w))
-		return (1/2)*((k1_pp-k2_pp)*b-(k1_pp+k2_pp)*c)
+		K1_pp, K2_pp = np.sum(np.multiply(K1, w)), np.sum(np.multiply(K2, w))
+		return (1/2)*((K1_pp-K2_pp)*b-(K1_pp+K2_pp)*c)
