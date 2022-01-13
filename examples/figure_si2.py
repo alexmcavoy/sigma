@@ -11,10 +11,10 @@ import sigma.exact as exact
 from sigma.simulation import run_simulations
 from sigma.utils import *
 
-def produce_panel_for_figure_2(structure, b, c, mutation_rates_exact, 
+def produce_panel_for_figure_si2(structure, b, c, mutation_rates_exact, 
 	mutation_rates_simulation, selection_intensities, number_of_updates, directory):
 	'''
-	Generates data and plots panels for figure 2
+	Generates data and plots panels for Figure SI2
 
 	Parameters
 	----------
@@ -83,10 +83,10 @@ def produce_panel_for_figure_2(structure, b, c, mutation_rates_exact,
 
 if __name__=='__main__':
 	# output directories
-	ba_directory = 'results/figure_2/barabasi-albert/'
-	er_directory = 'results/figure_2/erdos-renyi/'
+	ba_directory = 'results/figure_si2/barabasi-albert/'
+	er_directory = 'results/figure_si2/erdos-renyi/'
 	if len(sys.argv)>1 and sys.argv[1]=='True':
-		# load structures used to produce figure 1 in the text
+		# load structures used to produce Figure 1 in the text
 		structure_ba = open_data('data/figure_1/barabasi-albert/structure.pickle') # barabasi-albert graph
 		structure_er = open_data('data/figure_1/erdos-renyi/structure.pickle') # erdos-renyi graph
 	else:
@@ -117,9 +117,9 @@ if __name__=='__main__':
 		1-1/(number_of_points_simulation+1), number_of_points_simulation)
 
 	print('Producing panel(s) for BA graph.')
-	produce_panel_for_figure_2(structure_ba, b_ba, c, mutation_rates_exact, 
+	produce_panel_for_figure_si2(structure_ba, b_ba, c, mutation_rates_exact, 
 		mutation_rates_simulation, selection_intensities, number_of_updates, ba_directory)
 
 	print('Producing panel(s) for ER graph.')
-	produce_panel_for_figure_2(structure_er, b_er, c, mutation_rates_exact, 
+	produce_panel_for_figure_si2(structure_er, b_er, c, mutation_rates_exact, 
 		mutation_rates_simulation, selection_intensities, number_of_updates, er_directory)

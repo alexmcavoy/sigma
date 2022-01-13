@@ -8,26 +8,26 @@ Dependencies can be installed by typing
 
 	make init
 	
-To reproduce the figures in the main text, with the same structures, use
+To reproduce the figures in the paper, with the same structures, use
 
 
 	python3 -m examples.figure_1 True
-	python3 -m examples.figure_2 True
+	python3 -m examples.figure_si2 True
 	
 or just
 
 	make paper_examples
 	
-Otherwise, to generate new figures like those in the main text (but with randomly-generated graphs), use
+Otherwise, to generate new figures like those in the paper (but with randomly-generated graphs), use
 
 	python3 -m examples.figure_1
-	python3 -m examples.figure_2
+	python3 -m examples.figure_si2
 	
 or just
 
 	make new_examples
 	
-Parameters may be adjusted as needed in `examples/figure_1.py` and `examples/figure_2.py`.
+Parameters may be adjusted as needed in `examples/figure_1.py` and `examples/figure_si2.py`. Note that Figure SI1 can be generated using the code for Figure 1 with `selection_intensity = 0.05` replaced by `selection_intensity = 0.01`.
 	
 ## Contact information
 

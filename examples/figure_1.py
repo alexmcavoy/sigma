@@ -14,7 +14,7 @@ from sigma.utils import *
 def produce_panel_for_figure_1(structure, b, c, mutation_rates_exact, 
 	mutation_rates_simulation, selection_intensity, number_of_updates, directory):
 	'''
-	Generates data and plots panels for figure 1
+	Generates data and plots panels for Figure 1
 
 	Parameters
 	----------
@@ -78,7 +78,7 @@ if __name__=='__main__':
 	ba_directory = 'results/figure_1/barabasi-albert/'
 	er_directory = 'results/figure_1/erdos-renyi/'
 	if len(sys.argv)>1 and sys.argv[1]=='True':
-		# load structures used to produce figure 1 in the text
+		# load structures used to produce Figure 1 in the text
 		structure_ba = open_data('data/figure_1/barabasi-albert/structure.pickle') # barabasi-albert graph
 		structure_er = open_data('data/figure_1/erdos-renyi/structure.pickle') # erdos-renyi graph
 	else:
