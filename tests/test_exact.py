@@ -14,7 +14,7 @@ class TestExactMethods(unittest.TestCase):
 
 	def test_location_weights(self):
 		tilde_v = self.d*exact.location_weights(self.e, self.d, self.mutation_rate)
-		x = np.ones((self.e.shape[0],))
+		x = self.mutation_rate*np.ones((self.e.shape[0],))
 		y = np.asarray(self.e.shape[0]*tilde_v@(np.eye(self.e.shape[0])-(1-self.mutation_rate)*self.A)).ravel()
 		self.assertEqual(np.round(x, self.tol).tolist(), np.round(y, self.tol).tolist())
 

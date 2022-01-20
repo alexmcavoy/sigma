@@ -96,7 +96,7 @@ def location_weights(e, d, mutation_rate):
 	tilde_A = sp.eye(population_size, format='csr')-(1-mutation_rate)*(
 		e.transpose().multiply(sp.csr_matrix(1/np.transpose(d))))
 	tilde_v = sp.linalg.spsolve(tilde_A.transpose(), 
-		np.ones((population_size, 1))/population_size)
+		mutation_rate*np.ones((population_size, 1))/population_size)
 	return np.divide(tilde_v.transpose(), d)
 
 def identity_by_state_probabilities(A, mutation_rate, solver):
@@ -197,8 +197,8 @@ def structure_coefficients(structure, mutation_rate, solver):
 		term3 = ((v@mj)*phi[j, :].reshape(1, -1)).T
 		term4 = ((v@mj).T)@phi[j, :].reshape(1, -1)
 		term5 = np.sum(v@mj)/e.shape[0]
-		K1 += (1/2)*(-(term1+term2)+(1-mutation_rate)*(term3+term4)+term5)
-		K2 += (1/2)*(-(term1-term2)+(1-mutation_rate)*(term3-term4))
+		K1 += (1/(2*mutation_rate))*(-(term1+term2)+(1-mutation_rate)*(term3+term4)+term5)
+		K2 += (1/(2*mutation_rate))*(-(term1-term2)+(1-mutation_rate)*(term3-term4))
 	return K1, K2, np.asarray(w.todense()), np.asarray(A.todense())
 
 def frequency_derivative(K1, K2, w, A, b, c, social_good):
