@@ -11,10 +11,10 @@ import sigma.exact as exact
 from sigma.simulation import run_simulations
 from sigma.utils import *
 
-def produce_panel_for_figure_1(structure, b, c, mutation_rates_exact, 
+def produce_panel_for_figure_2(structure, b, c, mutation_rates_exact, 
 	mutation_rates_simulation, selection_intensity, number_of_updates, directory):
 	'''
-	Generates data and plots panels for Figure 1
+	Generates data and plots panels for Figure 2
 
 	Parameters
 	----------
@@ -75,12 +75,12 @@ def produce_panel_for_figure_1(structure, b, c, mutation_rates_exact,
 
 if __name__=='__main__':
 	# output directories
-	ba_directory = 'results/figure_1/barabasi-albert/'
-	er_directory = 'results/figure_1/erdos-renyi/'
+	ba_directory = 'results/figure_2/barabasi-albert/'
+	er_directory = 'results/figure_2/erdos-renyi/'
 	if len(sys.argv)>1 and sys.argv[1]=='True':
-		# load structures used to produce Figure 1 in the text
-		structure_ba = open_data('data/figure_1/barabasi-albert/structure.pickle') # barabasi-albert graph
-		structure_er = open_data('data/figure_1/erdos-renyi/structure.pickle') # erdos-renyi graph
+		# load structures used to produce Figure 2 in the text
+		structure_ba = open_data('data/figure_2/barabasi-albert/structure.pickle') # barabasi-albert graph
+		structure_er = open_data('data/figure_2/erdos-renyi/structure.pickle') # erdos-renyi graph
 	else:
 		# generate new structures
 		N, m, p = 50, 1, 0.05
@@ -109,9 +109,9 @@ if __name__=='__main__':
 			1-1/(number_of_points_simulation+1), number_of_points_simulation)
 
 	print('Producing panel for BA graph.')
-	produce_panel_for_figure_1(structure_ba, b, c, mutation_rates_exact, 
+	produce_panel_for_figure_2(structure_ba, b, c, mutation_rates_exact, 
 		mutation_rates_simulation, selection_intensity, number_of_updates, ba_directory)
 
 	print('Producing panel for ER graph.')
-	produce_panel_for_figure_1(structure_er, b, c, mutation_rates_exact, 
+	produce_panel_for_figure_2(structure_er, b, c, mutation_rates_exact, 
 		mutation_rates_simulation, selection_intensity, number_of_updates, er_directory)
