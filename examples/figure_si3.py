@@ -32,22 +32,23 @@ def produce_panel_for_figure_si3(selection_intensities, input_directory, output_
 		f = plt.figure(figsize=(10, 10))
 		plt.axhline(y=0.5, xmin=0, xmax=1, color=(0, 0, 0), linestyle='--')
 		for selection_intensity in selection_intensities:
-			simulation_data = open_data(os.path.join(input_directory, 'selection_intensities/'+'{:e}'.format(selection_intensity)+'/'+good_type+'-goods/simulation.pickle'))
+			simulation_data = open_data(os.path.join(input_directory, 'selection_intensities/{:e}/'.format(selection_intensity)+good_type+'-goods/simulation.pickle'))
 			plt.scatter(mutation_rates_simulation, simulation_data, label='$\delta = $'+'{}'.format(selection_intensity))
 		plt.xticks(fontsize=20)
 		plt.yticks([0, 0.25, 0.5, 0.75, 1], fontsize=20)
 		plt.xlim([0, 1])
 		plt.ylim([0, 1])
 		plt.grid()
-		plt.legend(fontsize=20, loc='upper right', markerscale=2.0)
+		plt.legend(fontsize=20, loc='upper center', markerscale=2.0)
 		os.makedirs(os.path.dirname(output_directory), exist_ok=True)
 		f.savefig(os.path.join(output_directory, good_type+'-goods_dataplot.pdf'), bbox_inches='tight')
 
 if __name__=='__main__':
-	# output directories
+	# input directories
 	ba_input_directory = 'data/figure_si2/barabasi-albert/'
 	er_input_directory = 'data/figure_si2/erdos-renyi/'
-
+	
+	# output directories
 	ba_output_directory = 'results/figure_si3/barabasi-albert/'
 	er_output_directory = 'results/figure_si3/erdos-renyi/'
 
