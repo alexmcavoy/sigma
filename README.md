@@ -13,12 +13,13 @@ To reproduce the figures in the paper, with the same structures, use
 
 	python3 -m examples.figure_2 True
 	python3 -m examples.figure_si2 True
+	python3 -m examples.figure_si3
 	
 or just
 
 	make paper_examples
 	
-Otherwise, to generate new figures like those in the paper (but with randomly-generated graphs), use
+Note that `figure_si3.py` uses data produced by `figure_si2.py`, which, by default, is the same data depicted in the paper. Otherwise, to generate new figures like those in the paper (but with randomly-generated graphs), use
 
 	python3 -m examples.figure_2
 	python3 -m examples.figure_si2
