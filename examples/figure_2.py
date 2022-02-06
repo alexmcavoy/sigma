@@ -35,6 +35,9 @@ def produce_panel_for_figure_2(structure, b, c, mutation_rates_exact,
 	directory: str
 		The path of the output directory
 	'''
+
+	save_data(mutation_rates_exact, os.path.join(directory, 'mutation_rates_exact.pickle'))
+	save_data(mutation_rates_simulation, os.path.join(directory, 'mutation_rates_simulation.pickle'))
 	
 	for benefit in b:
 		print('Running exact calculations for benefit %s.' % benefit)
@@ -58,7 +61,7 @@ def produce_panel_for_figure_2(structure, b, c, mutation_rates_exact,
 				else:
 					first_order_effects = locals()[good_type+'_'+data_type]
 				save_data(first_order_effects, os.path.join(directory, 
-					'benefits/'+'{:e}'.format(benefit)+'/'+good_type+'-goods/'+data_type+'.pickle'))
+					'benefits/{:e}/'.format(benefit)+good_type+'-goods/'+data_type+'.pickle'))
 
 		# plot exact and simulation results together
 		f = plt.figure(figsize=(10, 10))
@@ -71,7 +74,7 @@ def produce_panel_for_figure_2(structure, b, c, mutation_rates_exact,
 		plt.yticks(fontsize=20)
 		plt.xlim([0, 1])
 		plt.grid()
-		f.savefig(os.path.join(directory, 'benefits/'+'{:e}'.format(benefit)+'/dataplot.pdf'), bbox_inches='tight')
+		f.savefig(os.path.join(directory, 'benefits/'+'{:e}/'.format(benefit)+'dataplot.pdf'), bbox_inches='tight')
 
 if __name__=='__main__':
 	# output directories
@@ -97,7 +100,7 @@ if __name__=='__main__':
 	print_graph(structure_er, er_directory+'structure.pdf')
 
 	number_of_points_exact = 1000 # number of mutation rates used for exact calculations
-	number_of_points_simulation = 39 # number of mutation rates used for exact calculations
+	number_of_points_simulation = 39 # number of mutation rates used for simulations
 	number_of_updates = int(1e8) # number of updates used to take mean frequencies
 	selection_intensity = 0.05 # selection intensity
 

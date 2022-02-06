@@ -36,6 +36,9 @@ def produce_panel_for_figure_si2(structure, b, c, mutation_rates_exact,
 		The path of the output directory
 	'''
 	
+	save_data(mutation_rates_exact, os.path.join(directory, 'mutation_rates_exact.pickle'))
+	save_data(mutation_rates_simulation, os.path.join(directory, 'mutation_rates_simulation.pickle'))
+
 	print('Running exact calculations.')
 	start_time = time.time()
 	# run exact calculations (replace 'spsolve' with 'lsqr' to use a least-squares solver)
@@ -56,16 +59,7 @@ def produce_panel_for_figure_si2(structure, b, c, mutation_rates_exact,
 					frequencies = 0.5+selection_intensity*locals()[good_type+'_'+data_type]
 				else:
 					frequencies = locals()[good_type+'_'+data_type]
-				save_data(frequencies, os.path.join(directory, good_type+'-goods/'+data_type+'.pickle'))
-
-		save_data(0.5+selection_intensity*ff_exact, os.path.join(directory, 
-			'{:e}'.format(selection_intensity)+'/ff-goods/exact.pickle'))
-		save_data(0.5+selection_intensity*pp_exact, os.path.join(directory, 
-			'{:e}'.format(selection_intensity)+'/pp-goods/exact.pickle'))
-		save_data(ff_simulation, os.path.join(directory, 
-			'{:e}'.format(selection_intensity)+'/ff-goods/simulation.pickle'))
-		save_data(pp_simulation, os.path.join(directory, 
-			'{:e}'.format(selection_intensity)+'/pp-goods/simulation.pickle'))
+				save_data(frequencies, os.path.join(directory, 'selection_intensities/{:e}/'.format(selection_intensity)+good_type+'-goods/'+data_type+'.pickle'))
 
 		# plot exact and simulation results together
 		f = plt.figure(figsize=(10, 10))
@@ -79,7 +73,7 @@ def produce_panel_for_figure_si2(structure, b, c, mutation_rates_exact,
 		plt.xlim([0, 1])
 		plt.ylim([0, 1])
 		plt.grid()
-		f.savefig(os.path.join(directory, '{:e}'.format(selection_intensity)+'/dataplot.pdf'), bbox_inches='tight')
+		f.savefig(os.path.join(directory, 'selection_intensities/{:e}/'.format(selection_intensity)+'dataplot.pdf'), bbox_inches='tight')
 
 if __name__=='__main__':
 	# output directories
@@ -105,7 +99,7 @@ if __name__=='__main__':
 	print_graph(structure_er, er_directory+'structure.pdf')
 
 	number_of_points_exact = 1000 # number of mutation rates used for exact calculations
-	number_of_points_simulation = 39 # number of mutation rates used for exact calculations
+	number_of_points_simulation = 39 # number of mutation rates used for simulations
 	number_of_updates = int(1e8) # number of updates used to take mean frequencies
 	selection_intensities = [0.05, 0.20, 0.50] # selection intensities
 	
