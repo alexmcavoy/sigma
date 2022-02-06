@@ -87,8 +87,8 @@ if __name__=='__main__':
 	er_directory = 'results/figure_si2/erdos-renyi/'
 	if len(sys.argv)>1 and sys.argv[1]=='True':
 		# load structures used to produce Figure 1 in the text
-		structure_ba = open_data('data/figure_1/barabasi-albert/structure.pickle') # barabasi-albert graph
-		structure_er = open_data('data/figure_1/erdos-renyi/structure.pickle') # erdos-renyi graph
+		structure_ba = open_data('data/figure_2/barabasi-albert/structure.pickle') # barabasi-albert graph
+		structure_er = open_data('data/figure_2/erdos-renyi/structure.pickle') # erdos-renyi graph
 	else:
 		# generate new structures
 		N, m, p = 50, 1, 0.05
