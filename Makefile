@@ -15,6 +15,7 @@ test:
 paper_examples:
 	python3 -m examples.figure_2 True
 	python3 -m examples.figure_si2 True
+	python3 -m examples.figure_si3
 
 .PHONY: new_examples
 new_examples:
