@@ -28,7 +28,7 @@ def produce_panel_for_figure_si3(selection_intensities, input_directory, output_
 	mutation_rates_simulation = open_data(os.path.join(input_directory, 'mutation_rates_simulation.pickle'))
 	
 	for good_type in ['ff', 'pp']:
-		# plot exact and simulation results together
+		# simulation results for all selection intensities together
 		f = plt.figure(figsize=(10, 10))
 		plt.axhline(y=0.5, xmin=0, xmax=1, color=(0, 0, 0), linestyle='--')
 		for selection_intensity in selection_intensities:
